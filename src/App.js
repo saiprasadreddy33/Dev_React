@@ -16,7 +16,6 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/posts" element={<PostsPage />} />
           <Route path="/posts/:postId" element={<PostDetail />} />
