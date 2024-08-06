@@ -15,7 +15,7 @@ const HomePage = () => {
           <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
             Discover Amazing Features <br className="hidden md:block"/> for the Assignment
           </h1>
-          <p className="text-lg md:text-xl mb-8">Seamlessly integrate and scale with  top solutions.</p>
+          <p className="text-lg md:text-xl mb-8">Seamlessly integration solutions assignment.</p>
           <button
             onClick={() => navigate('/login')}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105"
