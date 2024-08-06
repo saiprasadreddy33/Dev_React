@@ -8,7 +8,8 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (page) => {
 
 export const createPost = createAsyncThunk('posts/createPost', async (post) => {
   const response = await axios.post('https://jsonplaceholder.typicode.com/posts', post);
-  return response.data;
+  // Return the post with an additional 'isNew' flag
+  return { ...response.data, isNew: true };
 });
 
 const postSlice = createSlice({
@@ -33,7 +34,7 @@ const postSlice = createSlice({
         state.error = error.message;
       })
       .addCase(createPost.fulfilled, (state, { payload }) => {
-        state.posts.unshift(payload); // Add new post at the beginning
+        state.posts = [payload, ...state.posts]; // Add new post at the beginning
       });
   },
 });

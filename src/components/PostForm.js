@@ -4,7 +4,7 @@ import { createPost } from '../redux/postSlice';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const PostForm = () => {
+const PostForm = ({ onPostCreated }) => { // Accept the callback as a prop
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const PostForm = () => {
     try {
       await dispatch(createPost({ title, body: description }));
       toast.success('Post created successfully');
+      onPostCreated(); // Call the callback to refetch posts
       navigate('/posts');
     } catch (error) {
       toast.error('Failed to create post');

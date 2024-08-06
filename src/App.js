@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import PostsPage from './pages/PostsPage';
@@ -10,22 +10,30 @@ import CreatePostPage from './pages/CreatePostPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/posts" element={<PostsPage />} />
-          <Route path="/posts/:postId" element={<PostDetail />} />
-          <Route path="/create-post" element={<CreatePostPage />} />
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
-        <ToastContainer />
-      </div>
-    </Router>
+    <div>
+      {!isHomePage && <Navbar />}
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/posts" element={<PostsPage />} />
+        <Route path="/posts/:postId" element={<PostDetail />} />
+        <Route path="/create-post" element={<CreatePostPage />} />
+        <Route path="/cart" element={<CartPage />} />
+      </Routes>
+      <ToastContainer />
+    </div>
   );
 }
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;

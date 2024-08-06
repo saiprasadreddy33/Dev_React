@@ -22,6 +22,13 @@ const Navbar = () => {
           {isMenuOpen && (
             <div className="navbar-dropdown">
               <Link
+                to="/"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Go - Home
+              </Link>
+              <Link
                 to="/posts"
                 className="block px-4 py-2 hover:bg-gray-100"
                 onClick={() => setIsMenuOpen(false)}

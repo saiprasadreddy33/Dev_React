@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { mockProducts } from '../utils/mockData';
 
 const initialState = {
-  products: [
-    { id: 1, name: 'Product A', price: 50, quantity: 1 },
-    { id: 2, name: 'Product B', price: 30, quantity: 1 },
-  ],
+  products: mockProducts,
   discount: 0,
 };
 
@@ -22,8 +20,26 @@ const cartSlice = createSlice({
     applyDiscount: (state, action) => {
       state.discount = action.payload;
     },
+    removeProduct: (state, action) => {
+      state.products = state.products.filter((product) => product.id !== action.payload);
+    },
+    loadSavedCart: (state, action) => {
+      state.products = action.payload.products;
+      state.discount = action.payload.discount;
+    },
+    addProduct: (state, action) => {
+      const { name, price, quantity } = action.payload;
+      const newProduct = {
+        id: state.products.length + 1, // Simple ID generation
+        name,
+        price,
+        quantity,
+      };
+      state.products.push(newProduct);
+    },
   },
 });
 
-export const { updateQuantity, applyDiscount } = cartSlice.actions;
+export const { updateQuantity, applyDiscount, removeProduct, loadSavedCart, addProduct } = cartSlice.actions;
+
 export default cartSlice.reducer;
